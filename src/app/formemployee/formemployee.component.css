@@ -1,0 +1,92 @@
+/* Estilos para el botón de abrir el modal */
+#myBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el modal */
+  .modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Posición fija */
+    z-index: 1; /* Hacer que el modal aparezca encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilitar el scroll si el contenido es demasiado grande */
+    background-color: rgba(0,0,0,0.4); /* Fondo semitransparente */
+  }
+  
+  /* Estilos para el contenido del modal */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; /* Centrar el modal verticalmente y dejar un margen en la parte superior */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ajustar el ancho del contenido al 80% del ancho del viewport */
+  }
+  
+  /* Estilos para el botón de cerrar el modal */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el formulario */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  input[type=text],
+  input[type=email],
+  input[type=password] {
+    
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 3px;
+  }
+  
+  button[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  input[type="file"] {
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+  }
+  
+  input[type="file"]:hover {
+    background-color: #f2f2f2;
+  }

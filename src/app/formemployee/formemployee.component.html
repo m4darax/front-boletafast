@@ -1,0 +1,31 @@
+<div *ngIf="modalService.modal" class="modal" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Crear Trabajador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form>
+            <label for="nombre">Nombre:</label>
+            <input type="text" [(ngModel)]="employee.name" id="name" name="nombre" required>
+            <label for="nombre">Primer Nombre:</label>
+            <input type="text" [(ngModel)]="employee.firstName" id="firstName" name="firstName" required>
+            <label for="nombre">Segundo Nombre:</label>
+            <input type="text" [(ngModel)]="employee.lastName" id="lastName" name="lastName" required>
+            <label for="email">Email:</label>
+            <input type="email" [(ngModel)]="employee.email" id="email" name="email" required>
+            <label for="dni">Dni:</label>
+            <input type="number" [(ngModel)]="employee.dni" id="dni" name="dni" required>
+            <label for="plantilla">File:</label>
+            <input type="file" [(ngModel)]="employee.pathJasperBoleta" id="plantilla" name="plantilla" required>
+            <button hidden type="submit">Registrarse</button>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="createEmploye(employee)">Guardar Empleado</button>
+        </div>
+      </div>
+    </div>
+  </div>
