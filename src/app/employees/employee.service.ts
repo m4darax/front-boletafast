@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Employee } from './employee';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
-import { map } from 'rxjs/operators'
+import { catchError, map } from 'rxjs/operators'
 import { Shippingrecord } from './shippingrecord';
+import { Recordshippingemployee } from './recordshippingemployee';
+import Swal from 'sweetalert2'
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,9 @@ export class EmployeeService {
   private urlRaiz: string = 'http://localhost:9000/'
   private urlEndPint: string = this.urlRaiz+'api/sendboleta' //get employess
   private urlEndPointDetailsShippingEmployee = this.urlRaiz+'api/detailsemployee'
+  private urlSendShippingUploadS3 = this.urlRaiz+"api/sendShippingUploadS3"
   private urlEndPointCreateEmployee = this.urlRaiz+'api/createemployee';
+  private urlEndPointUploadExcelS3 = this.urlRaiz+"api/fileexcel";
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor( private http: HttpClient) { }
@@ -35,7 +39,51 @@ export class EmployeeService {
     );
   }
 
-  createEmployee(employee: Employee): void{
-    this.http.post<Employee>(this.urlEndPointCreateEmployee, employee, {headers: this.httpHeaders}).subscribe();
+  createEmployee(employee: Employee): Observable<any> {
+  return this.http.post<any>(this.urlEndPointCreateEmployee, employee, {headers: this.httpHeaders}).pipe(
+      catchError( (e) => {  //aqui ingresa solo si sale error 
+        if ( e.status != 201 ) {
+          console.log(e)
+          Swal.fire('ERROR', 'Servicio no disponible', 'error')
+          return throwError(() => e);
+        }
+        return throwError(() => e);
+      })
+    );
   }
+
+  uploadImage(file: File, dni: string): Observable<any> {
+    let formData = new FormData();
+    formData.append("file", file);
+    formData.append("dni", dni);
+    return this.http.post(`${this.urlEndPointUploadExcelS3}`, formData);/*.pipe(
+      map((response: any) => {
+        return response.content.rows;
+      }),
+      catchError ( e => {
+        console.log(e);
+        return e;
+      })
+    );*/
+  }
+
+  employeeListSend(recordshippingemployee: Recordshippingemployee): void {
+
+    this.http.post<any>(this.urlSendShippingUploadS3, recordshippingemployee, { headers: this.httpHeaders}).subscribe();
+  }
+
+  downloadPdfBoleta(urlPdfS3: string): void {
+    fetch(urlPdfS3)
+    .then(response => response.blob())
+    .then(blob => {
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'example.pdf';
+      document.body.appendChild(a);
+      a.click();        
+      a.remove();
+    });
+  }
+
 }

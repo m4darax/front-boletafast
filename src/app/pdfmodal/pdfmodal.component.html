@@ -1,0 +1,13 @@
+<div class="modal">
+    <div class="modal-content">
+      <h2>Boleta de Pago</h2>
+      <p>Boleta de Pago</p>
+      <div class="modal-body">
+        <iframe [src]="safeUrl"  frameborder="0"></iframe>
+    </div>
+    <div>
+        <button style="margin: 4px;"  class="btn btn-secondary">Descargar</button>
+        <button class="btn btn-primary" (click)="closeModal()" >Cerrar</button>
+      </div>
+    </div>
+  </div>

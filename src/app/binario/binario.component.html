@@ -1,0 +1,20 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <h1 class="text-center mb-4">Traductor de Texto a Binario</h1>
+            <div class="mb-3">
+                <label for="input-text" class="form-label">Ingresa el texto a traducir:</label>
+                <textarea class="form-control" id="input-text" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="output-text" class="form-label">Resultado:</label>
+                <textarea class="form-control" id="output-text" rows="3" readonly></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="textToBinary()">Texto a Binario</button>
+            <button type="button" class="btn btn-secondary" onclick="binaryToText()">Binario a Texto</button>
+        </div>
+    </div>
+</div>
+<!--Importar Bootstrap 5 JS y el archivo JS personalizado-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+<script src="traductor.js"></script>

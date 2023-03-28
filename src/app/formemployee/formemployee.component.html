@@ -6,26 +6,53 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="closeModal()" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form>
-            <label for="nombre">Nombre:</label>
-            <input type="text" [(ngModel)]="employee.name" id="name" name="nombre" required>
-            <label for="nombre">Primer Nombre:</label>
-            <input type="text" [(ngModel)]="employee.firstName" id="firstName" name="firstName" required>
-            <label for="nombre">Segundo Nombre:</label>
-            <input type="text" [(ngModel)]="employee.lastName" id="lastName" name="lastName" required>
-            <label for="email">Email:</label>
-            <input type="email" [(ngModel)]="employee.email" id="email" name="email" required>
-            <label for="dni">Dni:</label>
-            <input type="number" [(ngModel)]="employee.dni" id="dni" name="dni" required>
-            <label for="plantilla">File:</label>
-            <input type="file" [(ngModel)]="employee.pathJasperBoleta" id="plantilla" name="plantilla" required>
-            <button hidden type="submit">Registrarse</button>
+            <form #clienteForm="ngForm">
+              <label for="nombre">Nombre:</label>
+              <input type="text" [(ngModel)]="employee.name" id="name" name="name" required #name="ngModel" minlength="4">
+                <div class="alert alert-danger" *ngIf="name.invalid && (name.dirty || name.touched)">
+                  <div *ngIf="name.errors?.['required']">
+                    Nombre es requerido
+                  </div>
+                  <div *ngIf="name.errors">
+                    El nombre debe tener 4 caracteres
+                  </div>
+               </div>
+              <label for="nombre">Primer Nombre:</label>
+              <input type="text" [(ngModel)]="employee.firstName" id="firstName" name="firstName" required #firstName="ngModel" maxlength="15">
+                <div class="alert alert-danger" *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                  <div *ngIf="firstName.errors?.['required']">
+                    Primer Apellido es requerido
+                  </div>
+                </div>
+              <label for="nombre">Segundo Nombre:</label>
+              <input type="text" [(ngModel)]="employee.lastName" id="lastName" name="lastName" required #lastName="ngModel">
+                <div class="alert alert-danger" *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                  <div *ngIf="lastName.errors?.['required']">
+                    Segundo Apellido es requerido
+                  </div>
+                </div>
+              <label for="email">Email:</label>
+              <input type="email" class="form-control" [(ngModel)]="employee.email" id="email" name="email" required #email="ngModel">
+                <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                  <div *ngIf="email.errors?.['required']">
+                    Email es requerido
+                  </div>
+                  <div *ngIf="email.errors?.['email']">
+                    El email debe tener un formato valido.
+                  </div>
+                </div>
+              <label for="dni">Dni:</label>
+              <input type="number" [(ngModel)]="employee.dni" id="dni" name="dni" required>
+              <label hidden for="plantilla">File:</label>
+              <input hidden type="file" [(ngModel)]="employee.pathJasperBoleta" id="plantilla" name="plantilla" required> 
+              <button hidden type="submit"  >Registrarse</button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" [disabled]="!clienteForm.form.valid" (click)="createEmploye(employee)">Guardar Empleado</button>
+              </div>
             </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary" (click)="createEmploye(employee)">Guardar Empleado</button>
-        </div>
+        </div>  
+        
       </div>
     </div>
   </div>

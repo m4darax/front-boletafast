@@ -1,21 +1,21 @@
 export class Employee {
 
-    id: string;
+    id?: string;
 
-	dni: number;
+	dni?: number;
 	
-	name: string;
+	name?: string;
 	
-	firstName: string ;
+	firstName?: string ;
 	
-	lastName: string ;
+	lastName?: string ;
 
-	pathJasperBoleta: string ;
+	pathJasperBoleta?: string ;
 	
-	dateCreateEmployee: Date ;
+	dateCreateEmployee?: Date ;
 	
-	email: string ;
+	email?: string ;
 
-	pathFileFullBoletaS3Public: string;
+	pathFileFullBoletaS3Public?: string;
 
 }
